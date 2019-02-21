@@ -10,5 +10,30 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer="defer" charset="utf-8"></script>
   </head>
-  <body></body>
+  <body>
+    <header class="top-bar">
+      <button class="material-icons button top-bar__navigation-icon">menu</button>
+      <h1 class="top-bar__title">Quize Master</h1>
+    </header>
+
+    <button type="button" class="button main__button main__button--visible">START QUIZ</button>
+
+    <main class="main">
+      <h2 class="main__title"></h2>
+      <div class="main__questions-container"></div>
+      <button type="button" class="button main__submit">Submit!</button>
+    </main>
+
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="my-dialog-title" aria-describedby="my-dialog-content">
+      <div class="dialog__container dialog__container--sm">
+        <h2 class="dialog__title" id="my-dialog-title"></h2>
+        <div class="dialog__content" id="my-dialog-content"></div>
+        <footer class="dialog__actions">
+          <button type="button" class="button dialog__button restart">Re-start</button>
+          <button type="button" class="button dialog__button close">Close</button>
+        </footer>
+      </div>
+      <div class="dialog__scrim"></div>
+    </div>
+  </body>
 </html>

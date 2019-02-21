@@ -12,7 +12,99 @@ body {
   height: 100vh;
 }
 
-.container {
+.button {
+  padding: 0 1rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.button:focus {
+  outline: 2px solid red;
+}
+
+/* --Top Bar-- */
+.top-bar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 3rem;
+  background-color: white;
+  box-shadow: 0px 4px 10px 0px #888888;
+}
+
+.top-bar__navigation-icon {
+  height: 100%;
+}
+
+.top-bar__title {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+}
+
+/* --Main-- */
+.main {
+  display: none;
+  flex-direction: column;
+  padding: 4rem 1rem 1rem;
+}
+
+.main--visible {
+  display: block;
+}
+
+.main__button {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  color: white;
+  padding: 1rem;
+  background-color: black;
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.5);
+}
+
+.main__button:active {
+  background-color: #888;
+}
+
+.main__button--visible {
+  display: block;
+}
+
+.question {
+  padding: 0.5rem 0;
+  border-bottom: 2px solid darkgrey;
+}
+
+.question__answers {
+  padding-top: 0.25rem;
+}
+
+.main__submit {
+  float: right;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 1rem;
+  margin: 0.5rem 0;
+}
+
+.main__submit:active {
+  background-color: #888;
+}
+
+/* --Dialog-- */
+.dialog {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -20,132 +112,47 @@ body {
   bottom: 0;
 }
 
-.container__bg {
+.dialog__container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 1rem;
+  z-index: 1;
+}
+
+.dialog__scrim {
   width: 100%;
   height: 100%;
   background-color: black;
   opacity: 0.5;
 }
 
-.dialog {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 1rem;
+.dialog--visible {
+  display: block;
 }
 
-.dialog__title {
-  font-size: 2rem;
+.dialog__content {
+  margin-top: 0.25rem;
 }
 
-.dialog__text {
+.dialog__actions {
   margin-top: 1rem;
-  font-size: 1.25rem;
-}
-
-.dialog__buttons {
   float: right;
-  margin-top: 2rem;
 }
 
-.dialog__re_start, .dialog__close {
-  background: none;
-  border: none;
+.dialog__button {
   font-size: 1.25rem;
-  padding: 0 16px;
 }
 
-.dialog__re_start {
-  margin-right: 1rem;
-}
-
-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 4rem;
-  background-color: white;
-  box-shadow: 0px 4px 20px 0px #888888;
-}
-
-.header__menu_button {
-  width: 4rem;
-  height: 100%;
-  font-size: 3rem;
-  background: none;
-  border: none;
-}
-
-.header__title {
-  display: inline-block;
-  font-size: 3rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-main {
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  padding-top: 3.5rem;
-}
-
-.main__startQuiz {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 1rem;
-  border-radius: 2rem;
-  font-size: 2rem;
-  border: none;
-  color: white;
-  background-color: black;
-  text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.7);
-  box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-}
-
-.main__startQuiz:active {
+.dialog__button:active {
   background-color: #888;
-}
-
-.main__error {
-  font-size: 4rem;
-  text-align: center;
-}
-
-.main__title {
-  margin-top: 1.5rem;
-  font-size: 3rem;
-}
-
-.main__submit {}
-
-.question__text, .main__submit {
-  font-size: 2rem;
-  margin-top: 1.5rem;
-}
-
-.question__container {
-  margin-top: 0.5rem;
-}
-
-.question__answer {
-  width: 1rem;
-  height: 1rem;
-}
-
-.question__answerText {
-  font-size: 1.5rem;
+  border-radius: 0.5rem;
 }
 
 @media (orientation: portrait) {
-  .dialog {
+  .dialog__container--sm {
     width: 80%;
   }
 }
