@@ -13,13 +13,19 @@
   <body>
     <header class="top-bar">
       <button class="material-icons button top-bar__navigation-icon">menu</button>
-      <h1 class="top-bar__title">Quize Master</h1>
+      <h1 class="top-bar__title" role="presentation">Quiz Master</h1>
     </header>
+
+    <div class="sideNav">
+      <button class="button sideNav__game" id="start">Game screen</button>
+      <button class="button sideNav__stats" id="stats">Stats</button>
+      <button class="button sideNav__about" id="about">About this app</button>
+    </div>
 
     <button type="button" class="button main__button main__button--visible">START QUIZ</button>
 
-    <main class="main">
-      <h2 class="main__title"></h2>
+    <main class="main" role="presentation" aria-labelledby="my-main-title">
+      <h2 class="main__title" id="my-main-title"></h2>
       <div class="main__questions-container"></div>
       <button type="button" class="button main__submit">Submit!</button>
     </main>
@@ -35,5 +41,7 @@
       </div>
       <div class="dialog__scrim"></div>
     </div>
+
+    <div class="info" visible="false"></div>
   </body>
 </html>

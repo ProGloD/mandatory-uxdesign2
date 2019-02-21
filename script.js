@@ -67,6 +67,9 @@ let score = {
   }
 };
 
+let nav = document.querySelector(".sideNav");
+let menu = document.querySelector(".top-bar__navigation-icon");
+
 let data = [];
 getData();
 trapFocus(document.querySelector(".dialog"));
@@ -76,8 +79,22 @@ document.querySelector(".main__submit").addEventListener("click", check);
 document.querySelector(".restart").addEventListener("click", restart);
 document.querySelector(".close").addEventListener("click", close);
 
+let menuTabs = nav.querySelectorAll(".button");
+for (let tab of menuTabs) {
+  tab.addEventListener("click", showInfo);
+}
+
+menu.addEventListener("click", function() {
+  nav.style.width = "250px";
+});
+
+nav.addEventListener("mouseleave", function() {
+  nav.style.width = "0";
+});
+
 function startQuiz() {
   document.querySelector(".main__questions-container").innerHTML = "";
+  nav.style.width = "0";
   game.reset();
 
   if (start.classList.contains("main__button--visible") && !main.classList.contains("main--visible")) {
@@ -90,6 +107,48 @@ function startQuiz() {
   createQuestions();
 
   getData();
+}
+
+function showInfo() {
+  nav.style.width = "0";
+
+  let info = document.querySelector(".info");
+  info.innerHTML = "";
+
+  if (this.id === "start") {
+    info.visible = "false";
+    if (!start.classList.contains("main__button--visible")) {
+      start.classList.toggle("main__button--visible");
+    }
+  } else {
+    if (start.classList.contains("main__button--visible")) {
+      start.classList.toggle("main__button--visible");
+    }
+    info.visible = "true";
+
+    if (this.id === "stats") {
+      let headers = ["Games Played", "Correct Answers", "Incorrect Answers", "Unanswered", "Correct Persentage"];
+      let texts = [score.getGamesPlayed(), score.getCorrect(), score.getIncorrect(), score.getUnanswered(), score.getWinrate() + "%"];
+
+      for (let i = 0; i < headers.length; i++) {
+        let h3 = document.createElement("h3");
+        h3.textContent = headers[i];
+        info.appendChild(h3);
+
+        let p = document.createElement("p");
+        p.textContent = texts[i];
+        info.appendChild(p);
+      }
+    } else if (this.id === "about") {
+      let h3 = document.createElement("h3");
+      h3.textContent = "About this app";
+      info.appendChild(h3);
+
+      let p = document.createElement("p");
+      p.textContent = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+      info.appendChild(p);
+    }
+  }
 }
 
 function check() {
@@ -107,6 +166,9 @@ function check() {
       game.increaseIncorrect();
     }
   }
+
+  score.increaseCorrect(game.getCorrect());
+  score.increaseIncorrect(game.getIncorrect());
 
   showResult();
 }
@@ -149,10 +211,13 @@ function createQuestions() {
 
     let question = document.createElement("div");
     question.setAttribute("class", "question question--sm");
+    question.setAttribute("role", "presentation");
+    question.setAttribute("aria-labelledby", "text" + qNumber);
 
     let qText = document.createElement("h3");
     qText.classList.add("question__text");
     qText.textContent = "Q" + qNumber + ". " + decode(obj.question);
+    qText.id = "text" + qNumber;
     question.appendChild(qText);
 
     correctAnswers.push(decode(obj.correct_answer));
@@ -172,14 +237,15 @@ function createQuestions() {
       answer.id = qAnswers[i];
       answer.type = "radio";
       answer.name = "q" + qNumber;
-      answer.dataset.pos = qNumber - 1;
+      answer.dataset.pos = qNumber - 1
       answer.value = qAnswers[i];
+      answer.setAttribute("aria-labelledby", qAnswers[i].split(" ").join("-"));
       container.appendChild(answer);
 
       let label = document.createElement("label");
       label.classList.add("question__answerText")
       label.textContent = qAnswers[i];
-      label.for = qAnswers[i];
+      label.id = qAnswers[i].split(" ").join("-");
       container.appendChild(label);
 
       question.appendChild(container);
@@ -208,7 +274,7 @@ function decode(input) {
 }
 
 function trapFocus(element) {
-  let focusableEls = element.querySelectorAll(".dialog__button");
+  let focusableEls = element.querySelectorAll(".button");
   let firstFocusableEl = focusableEls[0]
   let lastFocusableEl = focusableEls[focusableEls.length - 1];
   let KEYCODE_TAB = 9;

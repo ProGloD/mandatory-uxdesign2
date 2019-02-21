@@ -46,6 +46,32 @@ body {
   font-size: 1.5rem;
 }
 
+/* --Side Nav-- */
+.sideNav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  z-index: 2;
+}
+
+.sideNav .button {
+  padding: 8px 8px 8px 32px;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sideNav .button:hover {
+  color: #f1f1f1;
+}
+
 /* --Main-- */
 .main {
   display: none;
@@ -149,6 +175,11 @@ body {
 .dialog__button:active {
   background-color: #888;
   border-radius: 0.5rem;
+}
+
+/* --Info--*/
+.info {
+  padding: 4rem 1rem 1rem;
 }
 
 @media (orientation: portrait) {
